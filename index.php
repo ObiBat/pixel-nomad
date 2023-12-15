@@ -1,3 +1,55 @@
+<?php
+// $serverName = "pixelnomad.database.windows.net"; // e.g., "yourserver.database.windows.net"
+// $connectionOptions = array(
+//     "Database" => "pixelnomad",
+//     "Uid" => "CloudSAb8b0699e",
+//     "PWD" => "Onlyyou99!"
+// );
+
+// Check for form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errorMessage = "Invalid email format";
+    } else {
+        try {
+            // Establish connection
+            $conn = new PDO("sqlsrv:server = tcp:pixelnomad.database.windows.net,1433; Database = pixelnomad", "CloudSAb8b0699e", "Onlyyou99!");
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            if ($conn === false) {
+                throw new Exception("Could not connect to the database.");
+            }
+
+            // Insert query
+            $sql = "INSERT INTO subscribers (email) VALUES (?)";
+            $params = array($email);
+            $stmt = sqlsrv_query($conn, $sql, $params);
+            if ($stmt === false) {
+                throw new Exception("Could not insert data into the database.");
+            }
+
+            // Send confirmation email
+            $to = $email;
+            $subject = "Subscription Confirmation";
+            $message = "Thank you for subscribing!";
+            $headers = "From: admin@pixelnomad.studio";
+
+            if (!mail($to, $subject, $message, $headers)) {
+                throw new Exception("Email sending failed.");
+            }
+
+            $successMessage = "Subscription successful. Check your email for confirmation.";
+        } catch (PDOException $e) {
+            print("Error connecting to SQL Server.");
+            die(print_r($e));
+        }
+    }
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,9 +87,18 @@
                     <input type="email" placeholder="Enter your email" class="form-control mb-3" id="email" required style="opacity: 0.6; border-radius: 25px; border: 1px solid white; transition: all 0.3s ease-in-out;" onfocus="this.style.borderColor='#00B4D8'; this.style.boxShadow='0 0 8px #00B4D8';" onblur="this.style.borderColor='white'; this.style.boxShadow='none';">
                     <button type="button" class="btn-custom" onclick="subscribe()" data-aos="fade-up" data-aos-duration="1000">Subscribe</button>
                 </form>
+                <?php
+    if (!empty($successMessage)) {
+        echo "<p>$successMessage</p>";
+    }
+    if (!empty($errorMessage)) {
+        echo "<p>$errorMessage</p>";
+    }
+    ?>
+
                 <div class="social-links d-flex justify-content-center mt-4" data-aos="fade-up" data-aos-duration="1000">
-                    <a href="https://www.facebook.com/pixelnomad/" target="_blank" class="text-white me-3"><i class="bi bi-facebook" style="font-size: 2em;"></i></a>
-                    <a href="https://www.instagram.com/pixelnomad/" target="_blank" class="text-white"><i class="bi bi-instagram" style="font-size: 2em;"></i></a>
+                    <a href="https://www.facebook.com/pixelnomad.studio" target="_blank" class="text-white me-3"><i class="bi bi-facebook" style="font-size: 2em;"></i></a>
+                    <a href="https://www.instagram.com/pixelnomad.studio/" target="_blank" class="text-white"><i class="bi bi-instagram" style="font-size: 2em;"></i></a>
                 </div>
                 <p class="copyright text-white mt-5" data-aos="fade-up" data-aos-duration="1000">&copy; 2023 Pixel Nomad</p>
             </div>
