@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <h1 class="display-1 animated fadeInDown" style="font-family: 'Montserrat', sans-serif; text-shadow: 2px 2px 4px #000000;">PIXEL NOMAD</h1>
                 <h2 class="animated fadeInUp">Crafting your digital adventure.</h2>
                 <p class="lead animated fadeIn">Stay tuned for a space of creativity, connection, and exploration.</p>
-                <form id="email-form" method="post" action="index.php" data-aos="fade-up" data-aos-duration="1000">
+                <form id="email-form" method="post" action="https://pixelnomad.azurewebsites.net/" data-aos="fade-up" data-aos-duration="1000">
                      <input type="email" name="email" placeholder="Enter your email" class="form-control mb-3" required style="opacity: 0.6;">
                      <button type="submit" class="btn-custom" data-aos="fade-up" data-aos-duration="1000">Subscribe</button>
                </form>
