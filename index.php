@@ -1,10 +1,15 @@
 <?php
-// $serverName = "pixelnomad.database.windows.net"; // e.g., "yourserver.database.windows.net"
-// $connectionOptions = array(
-//     "Database" => "pixelnomad",
-//     "Uid" => "CloudSAb8b0699e",
-//     "PWD" => "Onlyyou99!"
-// );
+require 'vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+// Database credentials
+$serverName = "tcp:pixelnomad.database.windows.net,1433";
+$dbName = "pixelnomad";
+$username = "CloudSAb8b0699e";
+$password = "Onlyyou99!";
 
 // Check for form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,35 +18,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errorMessage = "Invalid email format";
     } else {
         try {
-            // Establish connection
-            $conn = new PDO("sqlsrv:server = tcp:pixelnomad.database.windows.net,1433; Database = pixelnomad", "CloudSAb8b0699e", "Onlyyou99!");
+            // Establish database connection
+            $conn = new PDO("sqlsrv:server=$serverName;Database=$dbName", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            if ($conn === false) {
-                throw new Exception("Could not connect to the database.");
-            }
 
             // Insert query
             $sql = "INSERT INTO subscribers (email) VALUES (?)";
-            $params = array($email);
-            $stmt = sqlsrv_query($conn, $sql, $params);
-            if ($stmt === false) {
-                throw new Exception("Could not insert data into the database.");
-            }
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$email]);
 
-            // Send confirmation email
-            $to = $email;
-            $subject = "Subscription Confirmation";
-            $message = "Thank you for subscribing!";
-            $headers = "From: admin@pixelnomad.studio";
+            // Prepare and send an email
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = 'smtp.pixelnomad.studio'; // e.g., smtp.sendgrid.net
+            $mail->SMTPAuth = true;
+            $mail->Username = 'admin@pixelnomad.studio';
+            $mail->Password = 'Onlyyou99!';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587; // or 465 if using SSL
 
-            if (!mail($to, $subject, $message, $headers)) {
-                throw new Exception("Email sending failed.");
-            }
+            $mail->setFrom('admin@pixelnomad.studio', 'Pixel Nomad');
+            $mail->addAddress($email);
 
+            $mail->isHTML(true);
+            $mail->Subject = 'Thank you for subscribing!';
+            $mail->Body = 'Welcome to Pixel Nomad! Stay tuned for updates.';
+
+            $mail->send();
             $successMessage = "Subscription successful. Check your email for confirmation.";
-        } catch (PDOException $e) {
-            print("Error connecting to SQL Server.");
-            die(print_r($e));
+        } catch (Exception $e) {
+            $errorMessage = "Error: " . $e->getMessage();
         }
     }
 }
@@ -83,18 +89,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <h1 class="display-1 animated fadeInDown" style="font-family: 'Montserrat', sans-serif; text-shadow: 2px 2px 4px #000000;">PIXEL NOMAD</h1>
                 <h2 class="animated fadeInUp">Crafting your digital adventure.</h2>
                 <p class="lead animated fadeIn">Stay tuned for a space of creativity, connection, and exploration.</p>
-                <form id="email-form" data-aos="fade-up" data-aos-duration="1000">
-                    <input type="email" placeholder="Enter your email" class="form-control mb-3" id="email" required style="opacity: 0.6; border-radius: 25px; border: 1px solid white; transition: all 0.3s ease-in-out;" onfocus="this.style.borderColor='#00B4D8'; this.style.boxShadow='0 0 8px #00B4D8';" onblur="this.style.borderColor='white'; this.style.boxShadow='none';">
-                    <button type="button" class="btn-custom" onclick="subscribe()" data-aos="fade-up" data-aos-duration="1000">Subscribe</button>
-                </form>
-                <?php
-    if (!empty($successMessage)) {
-        echo "<p>$successMessage</p>";
-    }
-    if (!empty($errorMessage)) {
-        echo "<p>$errorMessage</p>";
-    }
-    ?>
+                <form id="email-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" data-aos="fade-up" data-aos-duration="1000">
+                     <input type="email" name="email" placeholder="Enter your email" class="form-control mb-3" required style="opacity: 0.6;">
+                     <button type="submit" class="btn-custom" data-aos="fade-up" data-aos-duration="1000">Subscribe</button>
+               </form>
+        <?php
+        if (!empty($successMessage)) {
+            echo "<p>$successMessage</p>";
+        }
+        if (!empty($errorMessage)) {
+            echo "<p>$errorMessage</p>";
+        }
+        ?>
 
                 <div class="social-links d-flex justify-content-center mt-4" data-aos="fade-up" data-aos-duration="1000">
                     <a href="https://www.facebook.com/pixelnomad.studio" target="_blank" class="text-white me-3"><i class="bi bi-facebook" style="font-size: 2em;"></i></a>
