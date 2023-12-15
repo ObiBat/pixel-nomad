@@ -9,11 +9,12 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
-// Database credentials
-$serverName = "tcp:pixelnomad.database.windows.net,1433";
-$dbName = "pixelnomad";
-$username = "CloudSAb8b0699e";
-$password = "Onlyyou99!";
+// Database credentials for PostgreSQL
+$host = "host=pixelnomad-server.postgres.database.azure.com"; // e.g., "host=your-postgresql-server.postgres.database.azure.com"
+$port = "port=5432"; // Default port for PostgreSQL
+$dbname = "dbname=pixelnomad-database";
+$credentials = "user=lrqcyqqxsl password=Onlyyou99!"; // Update with PostgreSQL credentials
+
 
 // Check for form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,9 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errorMessage = "Invalid email format";
     } else {
         try {
-            // Establish database connection
-            $conn = new PDO("sqlsrv:server=$serverName;Database=$dbName", $username, $password);
+            // Establish database connection for PostgreSQL
+            $conn = new PDO("pgsql:$host; $port; $dbname; $credentials");
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
             // Insert query
             $sql = "INSERT INTO subscribers (email) VALUES (?)";
