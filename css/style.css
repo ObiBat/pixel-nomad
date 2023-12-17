@@ -56,6 +56,30 @@ h2, p {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); /* Shadow on hover */
 }
 
+
+.service-section {
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.service-section:hover {
+    transform: scale(1.05);
+}
+
+.service-section h3 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.service-section p {
+    color: #666;
+    font-size: 16px;
+}
+
 /* Additional styles for your project (buttons, forms, etc.) */
 
 @media only screen and (max-width: 768px) {
@@ -64,5 +88,9 @@ h2, p {
     }
     h2 {
         font-size: 1.2em;
+    }
+
+    .service-section {
+        margin: 10px 0;
     }
 }
