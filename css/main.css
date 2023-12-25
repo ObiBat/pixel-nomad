@@ -2924,7 +2924,7 @@ input[type=email] {
     /*  Page cover background image,color */
     background: url(../img/bg-default.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-attachment: fixed;
     z-index: -1; }
