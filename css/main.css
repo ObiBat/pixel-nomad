@@ -3041,6 +3041,18 @@ input[type=email] {
     margin-left: -10%;
     margin-top: -2%; }
 
+
+    /* by me */
+
+    @media (max-width: 600px) {
+      .cover-bg .bg-img {
+        width: auto !important;
+        height: auto !important;
+        background-size: cover !important;
+        background-position: center !important;
+      }
+    }
+
 /* b Clock */
 /* 2 Pageheader, Menu navigation dot */
 /* 2.1 Page header / .page-header / .page-header-drawer */
