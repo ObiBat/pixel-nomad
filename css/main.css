@@ -2926,7 +2926,7 @@ input[type=email] {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
     z-index: -1; }
   .page-cover .cover-bg-mask {
     position: absolute;
@@ -2942,7 +2942,7 @@ input[type=email] {
     background: rgba(0, 0, 0, 0.12);
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: scroll;
     z-index: 0;
     transition: 2s; }
   .page-cover .bg-blur-0 {
@@ -6501,11 +6501,3 @@ p {
 /* ipad and tablet */
 /* phone */
 
-
-@media (max-width: 600px) {
-  .page-cover .cover-bg .bg-img {
-    background-size: contain !important;
-    background-position: center !important;
-    background-repeat: no-repeat;
-  }
-}
