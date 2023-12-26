@@ -3044,12 +3044,7 @@ input[type=email] {
 
     /* by me */
 
-    @media (max-width: 600px) {
-      .cover-bg .bg-img {
-        background-size: contain !important;
-        background-position: center !important;
-      }
-    }
+
 
 /* b Clock */
 /* 2 Pageheader, Menu navigation dot */
@@ -6505,3 +6500,12 @@ p {
 /* ipad and tablet */
 /* ipad and tablet */
 /* phone */
+
+
+@media (max-width: 600px) {
+  .page-cover .cover-bg .bg-img {
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat;
+  }
+}
