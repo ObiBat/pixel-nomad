@@ -3046,9 +3046,7 @@ input[type=email] {
 
     @media (max-width: 600px) {
       .cover-bg .bg-img {
-        width: auto !important;
-        height: auto !important;
-        background-size: cover !important;
+        background-size: contain !important;
         background-position: center !important;
       }
     }
