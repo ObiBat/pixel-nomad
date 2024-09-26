@@ -19,7 +19,7 @@ Sample CSS overwriting main.css rules
 .media-service h4,
 .section-content h2,
 .section-content h3 {
-  font-family: 'Rubik Broken Fax', sans-serif; }
+  font-family: "Montserrat", "Open Sans", sans-serif; }
 
 .display-3 {
   font-weight: bold !important; }
