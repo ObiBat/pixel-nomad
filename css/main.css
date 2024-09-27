@@ -13,14 +13,14 @@ http://miradontsoa.com
 	0. Base Style
 		0.1 Tag and Class Initializer
 		0.2 Typography Initializer
-	1. Components 
+	1. Components
 		1.1 form, button, input
 			1.1.1 buttons
 			1.1.2 forms
 		1.2 Layout
 			1.2.1 Grid And Row / .grid-*, .row-product
 			1.2.2 Articles / .article .article-light
-			1.2.3 Images Layout / .image-frame /.image-frame-normal 
+			1.2.3 Images Layout / .image-frame /.image-frame-normal
 			1.4 . Additional UI
 	2. Pageheader, Menu navigation dot
 		2.1 Page header / .page-header / .page-header-alpha
@@ -44,8 +44,8 @@ http://miradontsoa.com
 	5. Helper classes / Responsiveness
 		5.1 Helper classes
 		5.2 Responsiveness
-	
-	Sample code altering this css file can be found in "style-colorX.css" file 
+
+	Sample code altering this css file can be found in "style-colorX.css" file
 
 **/
 /*------------------------------------------------------------------
@@ -6328,7 +6328,7 @@ input[type=email] {
   line-height: 1; }
   @media (min-width: 768px) {
     .display-1 {
-      font-size: 4.5rem; } 
+      font-size: 4.5rem; }
     }
   @media (min-width: 1200px) {
     .display-1 {
@@ -6501,3 +6501,31 @@ p {
 /* ipad and tablet */
 /* phone */
 
+
+
+
+
+/* SWIPER CAROUSEL - Start */
+
+.swiper {
+  width: 100%;
+}
+
+img.slideswipe {
+  height: 500px;
+}
+
+.swiper-button-prev {
+  color: white;
+  font-weight: 700;
+  font-size: 5em;
+}
+
+.swiper-button-next {
+  color: white;
+  font-weight: 700;
+  font-size: 5em;
+}
+
+
+/* SWIPER CAROUSEL - End */

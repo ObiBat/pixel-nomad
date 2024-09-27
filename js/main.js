@@ -4,7 +4,7 @@
 // init foundation
 // $(document).foundation();
 
-// Init all plugin when document is ready 
+// Init all plugin when document is ready
 $(document).on('ready', function () {
 	// 0. Init console to avoid error
 	var method;
@@ -30,7 +30,7 @@ $(document).on('ready', function () {
 	// page behavior
 	var fullpageContainer = $('.fullpage-container');
 
-	// 1. Background image as data attribut 
+	// 1. Background image as data attribut
 	var list = $('.bg-img');
 	for (var i = 0; i < list.length; i++) {
 		var src = list[i].getAttribute('data-image-src');
@@ -39,7 +39,7 @@ $(document).on('ready', function () {
 		list[i].style.backgroundPosition = "center";
 		list[i].style.backgroundSize = "cover";
 	}
-	// Image block to Background image 
+	// Image block to Background image
 	var listImgBlock = $('.img-block');
 	for (var i = 0; i < listImgBlock.length; i++) {
 		var src = listImgBlock[i].getAttribute('src');
@@ -183,7 +183,7 @@ $(document).on('ready', function () {
 		sliderBetaInit();
 		sliderGammaInit();
 	}
-	
+
 	// 5. Init video background
 	var videoBg = $('.video-container video, .video-container object');
 
@@ -295,10 +295,10 @@ $(document).on('ready', function () {
 					click: true,
 					submit: true,
 				},
-				
+
 				normalScrollElements: '.section .scrollable',
 				afterRender: function () {
-					// init slider 
+					// init slider
 					sliderAlphaInit();
 					sliderBetaInit();
 					sliderGammaInit();
@@ -374,7 +374,7 @@ $(document).on('ready', function () {
 					if (!activeSection.hasClass('section-anim')) {
 						// uncomment below for onetime animation
 						activeSection.addClass('section-anim');
-					} 
+					}
 
 					// hide or show clock
 					if ($('.section').hasClass('hide-clock')) {
@@ -453,7 +453,7 @@ $(document).on('ready', function () {
 		siteSections.each(function(i, el) {
 			var el = $(el);
 			if (el.visible(true)) {
-				el.addClass("active"); 
+				el.addClass("active");
 			}
 		});
 	});
@@ -463,12 +463,12 @@ $(document).on('ready', function () {
 		$('#page-loader').addClass('p-hidden');
 		$('.section').addClass('anim');
 		$('.scrollpage-container .section-home').addClass('active');
-		
+
 		siteSections.each(function(i, el) {
 			var el = $(el);
 			if (el.visible(true)) {
-				el.addClass("active"); 
-			} 
+				el.addClass("active");
+			}
 		});
 	});
 
@@ -482,4 +482,3 @@ $(document).on('ready', function () {
 	});
 
 });
-
