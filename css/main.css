@@ -59,6 +59,60 @@ http://miradontsoa.com
 	-  Roboto Condensed
 	-  Open Sans with fallback to system-ui fonts
 */
+.shadcn-inspired {
+  display: flex;
+  max-width: 500px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 3.6px;
+}
+
+.shadcn-input {
+  flex-grow: 1;
+  width: 100%; /* This ensures the input takes up all available space */
+  padding: 10.8px 14.4px;
+  font-size: 16px;
+  line-height: 21.6px;
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  transition: background-color 0.2s;
+  font-family: "Noto Sans", "Open Sans", "Segoe UI", "Opensans", "Roboto", "Helvetica", -apple-system, system-ui, BlinkMacSystemFont, sans-serif;
+}
+
+.shadcn-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10.8px 18px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21.6px;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: "Noto Sans", "Open Sans", "Segoe UI", "Opensans", "Roboto", "Helvetica", -apple-system, system-ui, BlinkMacSystemFont, sans-serif;
+  white-space: nowrap;
+  margin-right: -3.6px; /* This will make the button flush with the end */
+}
+
+.shadcn-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.shadcn-button span {
+  margin-right: 2px;
+}
+
+.shadcn-button svg {
+  width: 16.2px;
+  height: 16.2px;
+}
 .text-black {
   color: #1d1d1d !important; }
 
@@ -807,6 +861,7 @@ input[type=submit] {
     color: #1d1d1d; }
   .btn-circicon.btn-black:hover .icon {
     background: rgba(255, 255, 255, 0.2); }
+
 
 .btn-transp {
   font-family: "Glacial Indifference", "Montserrat", "Open Sans", sans-serif;
@@ -3180,12 +3235,14 @@ input[type=email] {
     .page-header-drawer .all-menu-wrapper.menu-visible {
       top: 0;
       opacity: 1;
-      visibility: visible; }
-    @media (max-width: 768px -1px) {
+      visibility: visible;
+    }
+    @media (max-width: 767px) {
       .page-header-drawer .all-menu-wrapper .navbar-nav .nav-item {
         font-size: 1.5rem;
-        opacity: 1; }
-        .page-header-drawer .all-menu-wrapper .navbar-nav .nav-item a {
+        opacity: 1;
+      }
+      .page-header-drawer .all-menu-wrapper .navbar-nav .nav-item a {
           opacity: 0.5; }
           .page-header-drawer .all-menu-wrapper .navbar-nav .nav-item a.active {
             color: currentColor; }

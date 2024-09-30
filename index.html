@@ -254,11 +254,28 @@ http://miradontsoa.com
 
 
 
+              <!-- Email sign-up form -->
+              <form id="emailSignupForm" class="anim-4 mt-4">
+                <div class="shadcn-inspired">
+                  <input style="font-family: 'VT323', sans-serif;" type="email" class="shadcn-input" id="emailInput" placeholder="Enter your email" required>
+                  <button class="shadcn-button" type="submit">
+                    <span style="font-family: 'Orbitron', sans-serif;">Sign Up</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+
+              <!-- Remove or comment out the existing button -->
+              <!--
               <div class="home-btns btns-action anim-4">
                 <a class="btn btn-line long-line" href="#projects">
                   <span class="text">Sign up</span>
                 </a>
               </div>
+              -->
             </div>
 
           </div>
@@ -366,6 +383,17 @@ http://miradontsoa.com
   <script src="./js/main.js"></script>
   <script src="js/particlejs/particles-init.js"></script>
 
+  <!-- Add this script at the end of the body, just before the closing </body> tag -->
+  <script>
+    document.getElementById('emailSignupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('emailInput').value;
+      // Here you would typically send the email to your server or email service
+      console.log('Email submitted:', email);
+      alert('Thank you for signing up!');
+      this.reset();
+    });
+  </script>
 
 </body>
 

@@ -482,3 +482,13 @@ $(document).on('ready', function () {
 	});
 
 });
+
+
+document.getElementById('emailSignupForm').addEventListener('submit', function(e) {
+	e.preventDefault();
+	var email = document.getElementById('emailInput').value;
+	// Here you would typically send the email to your server or email service
+	console.log('Email submitted:', email);
+	alert('Thank you for signing up!');
+	this.reset();
+  });
