@@ -3190,10 +3190,21 @@ input[type=email] {
     .page-header-drawer .navbar-brand .logo img {
       height: 40px;
       width: auto;
-      margin-right: 16px; }
+      margin-right: 16px;
+      border-radius: 50%; /* Makes the shape circular */
+      object-fit: cover; /* Ensures the image fills the circle without distortion */
+      border: 3px solid white; /* Optional: Adds a border */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow for a stylish look */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+     }
       @media (min-width: 768px) {
         .page-header-drawer .navbar-brand .logo img {
-          height: 40px; } }
+          height: 90px; } }
+
+    .logo:hover {
+      transform: scale(1.1); /* Slightly enlarges the picture */
+      }
+
     .page-header-drawer .navbar-brand .text {
       display: flex;
       justify-content: center;
@@ -5236,7 +5247,7 @@ input[type=email] {
   .section-home .btns-action {
     margin-bottom: -8px; }
   .section-home .home-title {
-    font-size: 4rem;
+    font-size: 3rem;
     line-height: 1;
     font-weight: bold;
     margin-bottom: 0.5rem; }
@@ -5328,10 +5339,10 @@ input[type=email] {
         height: 70vh; } }
 
 .section-home.section-center .home-title {
-  font-size: 4rem; }
+  font-size: 3rem; }
   @media (min-width: 1024px) {
     .section-home.section-center .home-title {
-      font-size: 6rem; } }
+      font-size: 4rem; } }
 
 .section-home.section-center .home-btns .btn-line.long-line {
   padding: 0 16px; }
@@ -6559,30 +6570,3 @@ p {
 /* phone */
 
 
-
-
-
-/* SWIPER CAROUSEL - Start */
-
-.swiper {
-  width: 100%;
-}
-
-img.slideswipe {
-  height: 500px;
-}
-
-.swiper-button-prev {
-  color: white;
-  font-weight: 700;
-  font-size: 5em;
-}
-
-.swiper-button-next {
-  color: white;
-  font-weight: 700;
-  font-size: 5em;
-}
-
-
-/* SWIPER CAROUSEL - End */
