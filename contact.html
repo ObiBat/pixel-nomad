@@ -443,7 +443,7 @@ http://miradontsoa.com
     window.addEventListener('message', function(event) {
       console.log('Received response:', event.data); // Debug log
       
-      if (event.data === 'success') {
+      if (event.data && event.data.status === 'success') {
         alert('Form submitted successfully!\n\nYour details have been recorded.');
         document.getElementById('booking-form').reset();
       } else if (event.data && event.data.message) {
