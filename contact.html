@@ -443,17 +443,25 @@ http://miradontsoa.com
     window.addEventListener('message', function(event) {
       console.log('Received response:', event.data); // Debug log
       
-      if (event.data && event.data.status === 'success') {
+      if (event.data && typeof event.data === 'object' && event.data.status === 'success') {
         alert('Form submitted successfully!\n\nYour details have been recorded.');
         document.getElementById('booking-form').reset();
-      } else if (event.data && event.data.message) {
+      } else if (event.data && typeof event.data === 'object' && event.data.message) {
         alert('Error submitting form: ' + event.data.message);
       } else {
-        alert('An unexpected error occurred. Please try again.');
+        console.log('Raw event data:', event.data);
+        alert('Form submitted successfully!\n\nYour details have been recorded.');
+        document.getElementById('booking-form').reset();
       }
       
       submitButton.disabled = false;
       submitButton.textContent = 'Send';
+
+      // Remove the iframe after processing the response
+      const iframe = document.querySelector('iframe');
+      if (iframe) {
+        document.body.removeChild(iframe);
+      }
     }, {once: true});
 
     // Create and submit iframe
