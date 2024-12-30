@@ -1338,7 +1338,9 @@ textarea {
 
 input[type=text],
 input[type=password],
-input[type=email] {
+input[type=email],
+input[type=date],
+input[type=tel] {
   width: 100%;
   font-size: 1.125rem;
   max-width: 320px;
@@ -1351,7 +1353,9 @@ input[type=email] {
   box-shadow: none; }
   input[type=text]:focus,
   input[type=password]:focus,
-  input[type=email]:focus {
+  input[type=email]:focus,
+  input[type=date]:focus,
+  input[type=tel]:focus {
     color: inherit;
     background: rgba(139, 139, 139, 0.17);
     box-shadow: none;
