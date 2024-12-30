@@ -26,15 +26,15 @@ http://miradontsoa.com
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Page Title">
   <meta name="twitter:description" content="Description of the page">
-  <meta name="twitter:image" content="/img/film.jpg">
+  <meta name="twitter:image" content="/img/logo.png">
 
   <!-- Facebook Meta -->
   <meta property="og:url" content="your website url here">
   <meta property="og:title" content="Page Title">
   <meta property="og:description" content="Description of the page">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/img/film.jpg">
-  <meta property="og:image:secure_url" content="/img/film.jpg">
+  <meta property="og:image" content="/img/logo.png">
+  <meta property="og:image:secure_url" content="/img/logo.png">
   <meta property="og:image:type" content="image/jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -210,7 +210,7 @@ http://miradontsoa.com
     <!-- Begin of home section -->
     <div class="section section-home fullscreen-md main-home section-center" data-section="home">
       <div class="section-cover item-cover">
-        <img class="img-block" src="img/items/film.jpg" alt="cover">
+        <img class="img-block" src="/img/logo.png" alt="cover">
       </div>
       <!-- Begin of section wrapper -->
       <div class="section-wrapper with-margin">
@@ -417,45 +417,48 @@ http://miradontsoa.com
   <!-- Javascript main files -->
   <script src="./js/main.js"></script>
 
+<!-- BEGIN: Custom fetch script for Google Apps Script submission -->
+<script>
+  document.getElementById('booking-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
 
-  <!-- BEGIN: Custom fetch script for Google Apps Script submission -->
-  <script>
-    document.getElementById('booking-form').addEventListener('submit', async function (event) {
-      event.preventDefault();
+    // Show loading state
+    const submitButton = this.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
 
-      // Grab form data
-      const customerName = document.getElementById('customerName').value;
-      const email = document.getElementById('email').value;
-      const mobileNumber = document.getElementById('mobileNumber').value;
-      const preferredDate = document.getElementById('preferredDate').value;
-      const message = document.getElementById('message').value;
+    // Grab form data
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => data[key] = value);
 
-      // Prepare JSON
-      const formData = { customerName, email, mobileNumber, preferredDate, message };
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxzsH-fg4HfAhI85pnVI8Dq1fqyL65gJEBuk_W4teKJirWdfKpGDJvbpCPLEdPcBLKfJw/exec', {
+        redirect: 'follow',
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        mode: 'cors'
+      });
 
-      try {
-        // Replace YOUR_WEB_APP_URL_HERE with your deployed Apps Script URL
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxzsH-fg4HfAhI85pnVI8Dq1fqyL65gJEBuk_W4teKJirWdfKpGDJvbpCPLEdPcBLKfJw/exec', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-
-        const result = await response.json();
-        if (result.status === 'success') {
-          alert('Form submitted successfully!');
-          // Optionally reset the form
-          document.getElementById('booking-form').reset();
-        } else {
-          alert('Form submission failed. Please try again.');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again later.');
+      if (response.ok) {
+        alert('Form submitted successfully!');
+        this.reset();
+      } else {
+        throw new Error('Network response was not ok');
       }
-    });
-  </script>
-  <!-- END: Custom fetch script -->
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+    } finally {
+      // Reset button state
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send';
+    }
+  });
+</script>
 </body>
 
 </html>
