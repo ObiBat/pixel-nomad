@@ -41,7 +41,6 @@ http://miradontsoa.com
 
   <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
   <!-- Web fonts and Web Icons -->
-  <link rel="stylesheet" href="./fonts/notosans/stylesheet.css">
   <link rel="stylesheet" href="./fonts/glacial/stylesheet.css">
   <link rel="stylesheet" href="./fonts/montserrat/stylesheet.css">
   <link rel="stylesheet" href="./fonts/playfair/stylesheet.css">
@@ -444,7 +443,7 @@ http://miradontsoa.com
     window.addEventListener('message', function(event) {
       console.log('Received response:', event.data); // Debug log
       
-      if (event.data && event.data.status === 'success') {
+      if (event.data === 'success') {
         alert('Form submitted successfully!\n\nYour details have been recorded.');
         document.getElementById('booking-form').reset();
       } else if (event.data && event.data.message) {
