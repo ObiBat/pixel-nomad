@@ -209,9 +209,7 @@ http://miradontsoa.com
 
     <!-- Begin of home section -->
     <div class="section section-home fullscreen-md main-home section-center" data-section="home">
-      <div class="section-cover item-cover">
-        <img class="img-block" src="/img/logo.png" alt="cover">
-      </div>
+
       <!-- Begin of section wrapper -->
       <div class="section-wrapper with-margin">
         <!-- content -->
@@ -439,11 +437,13 @@ http://miradontsoa.com
     window.addEventListener('message', function(event) {
       console.log('Received response:', event.data);
       
-      if (event.data.status === 'success') {
+      if (event.data && event.data.status === 'success') {
         alert('Form submitted successfully!\n\nYour details have been recorded.');
         document.getElementById('booking-form').reset();
-      } else {
+      } else if (event.data && event.data.message) {
         alert('Error submitting form: ' + event.data.message);
+      } else {
+        alert('An unexpected error occurred. Please try again.');
       }
       
       submitButton.disabled = false;
@@ -456,10 +456,13 @@ http://miradontsoa.com
     document.body.appendChild(iframe);
     iframe.src = url.toString();
 
-    // Cleanup iframe after 10 seconds (should be plenty of time for response)
-    setTimeout(() => {
+    // Add timeout handler
+    const timeoutId = setTimeout(() => {
       if (document.body.contains(iframe)) {
         document.body.removeChild(iframe);
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send';
+        alert('The request timed out. Please try again.');
       }
     }, 10000);
   });
