@@ -416,7 +416,6 @@ http://miradontsoa.com
 
   <!-- Javascript main files -->
   <script src="./js/main.js"></script>
-
 <!-- BEGIN: Custom fetch script for Google Apps Script submission -->
 <script>
   document.getElementById('booking-form').addEventListener('submit', function (event) {
@@ -436,35 +435,33 @@ http://miradontsoa.com
     const url = new URL('https://script.google.com/macros/s/AKfycbxzsH-fg4HfAhI85pnVI8Dq1fqyL65gJEBuk_W4teKJirWdfKpGDJvbpCPLEdPcBLKfJw/exec');
     url.searchParams.append('data', JSON.stringify(data));
 
-    // Create a temporary iframe
+    // Add message event listener before creating iframe
+    window.addEventListener('message', function(event) {
+      console.log('Received response:', event.data);
+      
+      if (event.data.status === 'success') {
+        alert('Form submitted successfully!\n\nYour details have been recorded.');
+        document.getElementById('booking-form').reset();
+      } else {
+        alert('Error submitting form: ' + event.data.message);
+      }
+      
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send';
+    }, {once: true}); // Remove listener after first use
+
+    // Create and submit iframe
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     document.body.appendChild(iframe);
-
-    // Submit the form through the iframe
-    iframe.addEventListener('load', function() {
-      // Form submitted successfully
-      alert('Form submitted successfully!');
-      document.getElementById('booking-form').reset();
-      
-      // Cleanup
-      document.body.removeChild(iframe);
-      submitButton.disabled = false;
-      submitButton.textContent = 'Send';
-    });
-
-    iframe.addEventListener('error', function() {
-      // Handle error
-      alert('An error occurred. Please try again later.');
-      
-      // Cleanup
-      document.body.removeChild(iframe);
-      submitButton.disabled = false;
-      submitButton.textContent = 'Send';
-    });
-
-    // Submit the form
     iframe.src = url.toString();
+
+    // Cleanup iframe after 10 seconds (should be plenty of time for response)
+    setTimeout(() => {
+      if (document.body.contains(iframe)) {
+        document.body.removeChild(iframe);
+      }
+    }, 10000);
   });
 </script>
 </body>
