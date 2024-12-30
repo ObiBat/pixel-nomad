@@ -415,6 +415,7 @@ http://miradontsoa.com
   <!-- Javascript main files -->
   <script src="./js/main.js"></script>
 <!-- BEGIN: Custom fetch script for Google Apps Script submission -->
+<!-- BEGIN: Custom fetch script for Google Apps Script submission -->
 <script>
   document.getElementById('booking-form').addEventListener('submit', function (event) {
     event.preventDefault();
@@ -424,10 +425,16 @@ http://miradontsoa.com
     submitButton.disabled = true;
     submitButton.textContent = 'Sending...';
 
-    // Get form data
-    const formData = new FormData(this);
-    const data = {};
-    formData.forEach((value, key) => data[key] = value);
+    // Get form data properly using element IDs
+    const data = {
+      customerName: document.getElementById('customerName').value,
+      email: document.getElementById('email').value,
+      mobileNumber: document.getElementById('mobileNumber').value,
+      preferredDate: document.getElementById('preferredDate').value,
+      message: document.getElementById('message').value
+    };
+
+    console.log('Sending data:', data); // Debug log
 
     // Create the URL with parameters
     const url = new URL('https://script.google.com/macros/s/AKfycbxzsH-fg4HfAhI85pnVI8Dq1fqyL65gJEBuk_W4teKJirWdfKpGDJvbpCPLEdPcBLKfJw/exec');
@@ -435,7 +442,7 @@ http://miradontsoa.com
 
     // Add message event listener before creating iframe
     window.addEventListener('message', function(event) {
-      console.log('Received response:', event.data);
+      console.log('Received response:', event.data); // Debug log
       
       if (event.data && event.data.status === 'success') {
         alert('Form submitted successfully!\n\nYour details have been recorded.');
@@ -448,7 +455,7 @@ http://miradontsoa.com
       
       submitButton.disabled = false;
       submitButton.textContent = 'Send';
-    }, {once: true}); // Remove listener after first use
+    }, {once: true});
 
     // Create and submit iframe
     const iframe = document.createElement('iframe');
@@ -457,7 +464,7 @@ http://miradontsoa.com
     iframe.src = url.toString();
 
     // Add timeout handler
-    const timeoutId = setTimeout(() => {
+    setTimeout(() => {
       if (document.body.contains(iframe)) {
         document.body.removeChild(iframe);
         submitButton.disabled = false;
