@@ -1,2 +1,2 @@
-# pixel nomad
- Introduction website version 1.0 
+# Obijpg.com
+ Photography portfolio showcasing and booking web application.
