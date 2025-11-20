@@ -2,7 +2,7 @@
 
 ## ✅ What Was Done
 
-### 1. **Packages Page Redesign** (`packages.html`)
+### 1. **Pricing Page Redesign** (`packages.html`)
 - ✨ Professional, minimal design with glass-morphism cards
 - 💰 Updated pricing (30% reduction):
   - **Hourly Sessions**: $175.00/hr
@@ -64,7 +64,7 @@ Your site will automatically deploy from your git repository.
 
 ## 💡 Key Features
 
-### Packages Page
+### Pricing Page
 - Clean, modern pricing cards
 - Professional features list
 - Clear call-to-action buttons

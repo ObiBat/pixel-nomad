@@ -5,12 +5,12 @@ Photography portfolio showcasing and booking web application for **Obi Batbileg 
 ## 🎨 Features
 
 - **Modern Portfolio Design** - Minimal, professional aesthetic with smooth animations
-- **Photography Packages** - Clear pricing for hourly and full-day sessions
+- **Photography Pricing** - Clear pricing for hourly and full-day sessions
 - **Online Booking Form** - Netlify Forms integration for direct email submissions
 - **Responsive Design** - Works beautifully on all devices
 - **Gallery Showcase** - Full-screen image slider with professional presentation
 
-## 📦 Photography Packages
+## 💰 Photography Pricing
 
 ### Hourly Sessions
 - **$175.00/hr**
